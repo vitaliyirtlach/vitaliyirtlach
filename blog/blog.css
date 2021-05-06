@@ -1,6 +1,0 @@
-.posts a {
-  display: block;
-}
-.posts a::before {
-  content: "— ";
-}
