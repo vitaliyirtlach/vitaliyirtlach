@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="max-w-[900px] mx-auto py-12">
+    <div className="max-w-[900px] mx-auto p-12">
       <Head>
         <title>Vitaliy Irtlach - Fullstack Software Engineer</title>
       </Head>
