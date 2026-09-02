@@ -7,19 +7,19 @@ import { OPEN_TO_WORK, profile, socials } from "@/data/profile";
 function HandArrow({ className }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 40 32"
+      viewBox="0 0 36 22"
       fill="none"
       className={className}
       aria-hidden="true"
     >
       <path
-        d="M4 4c2 10 10 18 26 20"
+        d="M3 3c2 8 11 13.5 27 13.5"
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinecap="round"
       />
       <path
-        d="M24 28.5l6.5-3.5-1-7"
+        d="M25 11l6.5 5.5-8 3"
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinecap="round"
@@ -152,10 +152,12 @@ export default function Hero() {
         </p>
       </div>
 
-      <div className="relative mt-1 pt-7">
-        <span className="pointer-events-none absolute left-1 top-0 flex select-none items-start gap-1 font-hand text-[17px] leading-none text-foreground-tertiary">
-          <span className="-rotate-6">{OPEN_TO_WORK ? "open to work" : "say hi"}</span>
-          <HandArrow className="mt-1.5 h-6 w-8" />
+      <div className="mt-1 flex flex-wrap items-center gap-2.5">
+        <span className="pointer-events-none hidden select-none items-center gap-1 pr-1 font-hand text-[17px] leading-none text-foreground-tertiary min-[480px]:flex">
+          <span className="-translate-y-2 -rotate-6">
+            {OPEN_TO_WORK ? "open to work" : "say hi"}
+          </span>
+          <HandArrow className="h-[22px] w-9" />
         </span>
         <div className="flex flex-wrap items-center gap-2.5">
           <a
