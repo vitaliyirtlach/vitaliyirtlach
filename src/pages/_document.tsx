@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="shortcut icon" href="/photo.jpeg" type="image/x-icon" />
+        <link rel="icon" href="/photo.jpeg" type="image/jpeg" />
       </Head>
       <body>
         <Main />
