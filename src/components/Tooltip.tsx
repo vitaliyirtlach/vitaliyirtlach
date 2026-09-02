@@ -82,14 +82,22 @@ export default function Tooltip({ label, children }: Props) {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 4, scale: 0.97 }}
                   transition={{ duration: 0.22, ease: [0.21, 0.47, 0.32, 0.98] }}
-                  className="relative block w-max max-w-[260px] rounded-[10px] bg-[#1c1c1c]/95 px-3 py-2 text-center text-xs font-medium leading-[17px] text-white shadow-[0_10px_30px_-6px_rgba(0,0,0,0.3)] backdrop-blur-sm"
+                  className="relative block w-max max-w-[260px] rounded-[10px] bg-[#1c1c1c] px-3 py-2 text-center text-xs font-medium leading-[17px] text-white shadow-[0_10px_30px_-6px_rgba(0,0,0,0.3)]"
                 >
                   {label}
-                  <span
+                  <svg
                     aria-hidden="true"
-                    className="absolute top-full -mt-1 size-2 -translate-x-1/2 rotate-45 rounded-[2px] bg-[#1c1c1c]/95"
+                    width="14"
+                    height="6"
+                    viewBox="0 0 14 6"
+                    className="absolute top-full -mt-px -translate-x-1/2 text-[#1c1c1c]"
                     style={{ left: `calc(50% + ${pos.arrow}px)` }}
-                  />
+                  >
+                    <path
+                      d="M0 0h14L8.45 4.87a2.2 2.2 0 0 1-2.9 0L0 0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </motion.span>
               </span>
             )}
