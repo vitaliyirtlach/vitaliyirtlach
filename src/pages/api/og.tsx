@@ -94,21 +94,10 @@ export default function handler(req: NextRequest) {
           Ito (AI code review) and Statable (web analytics).
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-            {STACK.map((icon) => (
-              <Icon key={icon.title} icon={icon} size={44} />
-            ))}
-          </div>
-          <div style={{ display: "flex", fontSize: 26, color: "#8f8f8f" }}>
-            vitaliyirtlach.vercel.app
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+          {STACK.map((icon) => (
+            <Icon key={icon.title} icon={icon} size={44} />
+          ))}
         </div>
       </div>
     ),
