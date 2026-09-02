@@ -5,21 +5,40 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import Skills from "@/components/Skills";
+import { SITE_URL } from "@/data/profile";
+
+const TITLE = "Vitaliy Irtlach – Fullstack JavaScript Engineer";
+const DESCRIPTION =
+  "Fullstack JavaScript engineer with 5 years of experience building web and mobile products with TypeScript, React and Node.js. Working on Ito and Statable.";
+const OG_IMAGE = `${SITE_URL}/api/og`;
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Vitaliy Irtlach – Fullstack JavaScript Engineer</title>
+        <title>{TITLE}</title>
+        <meta name="description" content={DESCRIPTION} />
+        <link rel="canonical" href={SITE_URL} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Vitaliy Irtlach" />
+        <meta property="og:title" content={TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta
-          name="description"
-          content="Vitaliy Irtlach — fullstack JavaScript engineer building web and mobile products with TypeScript, React and Node.js."
+          property="og:image:alt"
+          content="Vitaliy Irtlach — Fullstack JavaScript Engineer"
         />
-        <meta property="og:title" content="Vitaliy Irtlach" />
-        <meta
-          property="og:description"
-          content="Fullstack JavaScript engineer building web and mobile products."
-        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        <meta name="twitter:creator" content="@vitaliyirtlach" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className="mx-auto flex w-full max-w-[640px] flex-col gap-11 px-5 py-16 sm:py-20">

@@ -49,6 +49,8 @@ import {
 // Flip to true to show the "open to work" note and experience entry.
 export const OPEN_TO_WORK = false;
 
+export const SITE_URL = "https://vitaliyirtlach.vercel.app";
+
 export const profile = {
   name: "Vitaliy Irtlach",
   title: "Fullstack JavaScript Engineer",
@@ -121,7 +123,7 @@ const jobs: ExperienceEntry[] = [
   {
     company: "Jobbit",
     role: "Frontend Engineer",
-    period: "Jan 24 - Now",
+    period: "Jan 24 - Dec 25",
     location: "Remote",
     logo: "/logos/jobbit.jpg",
     href: "https://jobbit.uk",
