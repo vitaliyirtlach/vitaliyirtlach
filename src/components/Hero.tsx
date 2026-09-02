@@ -152,8 +152,8 @@ export default function Hero() {
         </p>
       </div>
 
-      <div className="mt-1 flex flex-wrap items-center gap-2.5">
-        <span className="pointer-events-none hidden select-none items-center gap-1 pr-1 font-hand text-[17px] leading-none text-foreground-tertiary min-[480px]:flex">
+      <div className="relative mt-1 flex flex-wrap items-center gap-2.5">
+        <span className="pointer-events-none absolute right-full top-1/2 mr-3 hidden -translate-y-1/2 select-none items-center gap-1 font-hand text-[17px] leading-none text-foreground-tertiary lg:flex">
           <span className="-translate-y-2 -rotate-6">
             {OPEN_TO_WORK ? "open to work" : "say hi"}
           </span>
