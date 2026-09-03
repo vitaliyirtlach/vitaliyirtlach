@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
-import { IconBrandTelegram, IconFileTypePdf } from "@tabler/icons-react";
+import {
+  IconBrandWhatsapp,
+  IconFileTypePdf,
+  IconMail,
+} from "@tabler/icons-react";
 import ResumeDoc from "@/components/ResumeDoc";
 import { OPEN_TO_WORK, profile, socials } from "@/data/profile";
 
@@ -161,13 +165,20 @@ export default function Hero() {
         </span>
         <div className="flex flex-wrap items-center gap-2.5">
           <a
-            href={profile.telegram}
+            href={`mailto:${profile.email}`}
+            className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-foreground px-3.5 text-[13px] font-medium text-white shadow-sm transition-all hover:opacity-85 active:scale-[0.97]"
+          >
+            <IconMail className="size-4" stroke={1.8} aria-hidden />
+            Email me
+          </a>
+          <a
+            href={profile.whatsapp}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-[#2AABEE] px-3.5 text-[13px] font-medium text-white shadow-sm transition-all hover:bg-[#229ED9] active:scale-[0.97]"
+            className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-[#25D366] px-3.5 text-[13px] font-medium text-white shadow-sm transition-all hover:bg-[#1FB855] active:scale-[0.97]"
           >
-            <IconBrandTelegram className="size-4" stroke={1.8} aria-hidden />
-            Message on Telegram
+            <IconBrandWhatsapp className="size-4" stroke={1.8} aria-hidden />
+            WhatsApp
           </a>
           <button
             type="button"

@@ -5,7 +5,6 @@ import {
   IconBrandLinkedin,
   IconBrandOpenai,
   IconBrandTelegram,
-  IconBrandUpwork,
   IconBrandX,
   IconClock,
   IconDeviceLaptop,
@@ -135,6 +134,7 @@ export const profile = {
   photo: "/photo.jpeg",
   telegram: "https://t.me/vitaliyirtlach",
   email: "vitaliyirtlach@gmail.com",
+  whatsapp: "https://wa.me/380993123809",
   location: "Athens, Greece",
 };
 
@@ -146,15 +146,15 @@ export const socials: Social[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/vitaliyirtlach/", icon: IconBrandLinkedin },
   { label: "Telegram", href: "https://t.me/vitaliyirtlach", icon: IconBrandTelegram },
   { label: "Instagram", href: "https://www.instagram.com/vitaliyirtlach/", icon: IconBrandInstagram },
-  { label: "Upwork", href: "https://www.upwork.com/freelancers/~01c2b7dfc502099e16", icon: IconBrandUpwork },
-  { label: "Email", href: "mailto:vitaliyirtlach@gmail.com", icon: IconMail },
 ];
 
 export type ExperienceEntry = {
   company: string;
   role: string;
-  period: string;
-  location: string;
+  /** [year, month], month is 1-based */
+  start: [number, number];
+  /** omit while the role is ongoing */
+  end?: [number, number];
   icon?: Icon;
   logo?: string;
   current?: boolean;
@@ -162,11 +162,36 @@ export type ExperienceEntry = {
   bullets: string[];
 };
 
+const MONTHS = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+function monthLabel([year, month]: [number, number]): string {
+  return `${MONTHS[month - 1]} ${String(year).slice(2)}`;
+}
+
+export function formatPeriod(e: ExperienceEntry): string {
+  return `${monthLabel(e.start)} - ${e.end ? monthLabel(e.end) : "Present"}`;
+}
+
+export function formatDuration(e: ExperienceEntry): string {
+  const now = new Date();
+  const [endY, endM] = e.end ?? [now.getFullYear(), now.getMonth() + 1];
+  // LinkedIn-style inclusive month count
+  const months = (endY - e.start[0]) * 12 + (endM - e.start[1]) + 1;
+  const years = Math.floor(months / 12);
+  const rest = months % 12;
+  const parts: string[] = [];
+  if (years > 0) parts.push(`${years} yr${years > 1 ? "s" : ""}`);
+  if (rest > 0) parts.push(`${rest} mo${rest > 1 ? "s" : ""}`);
+  return parts.join(" ") || "1 mo";
+}
+
 const openToWorkEntry: ExperienceEntry = {
   company: "Open to work",
   role: "",
-  period: "Now",
-  location: "Remote",
+  start: [new Date().getFullYear(), new Date().getMonth() + 1],
   icon: IconSearch,
   current: true,
   bullets: [],
@@ -176,8 +201,7 @@ const jobs: ExperienceEntry[] = [
   {
     company: "Ito AI",
     role: "JavaScript Developer",
-    period: "Dec 25 - Now",
-    location: "Remote",
+    start: [2025, 12],
     logo: "/logos/ito.png",
     href: "https://www.ito.ai/",
     bullets: [
@@ -189,8 +213,7 @@ const jobs: ExperienceEntry[] = [
   {
     company: "Statable",
     role: "JavaScript Developer",
-    period: "Aug 25 - Now",
-    location: "Remote",
+    start: [2025, 8],
     logo: "/logos/statable.png",
     href: "https://statable.com",
     bullets: [
@@ -201,8 +224,8 @@ const jobs: ExperienceEntry[] = [
   {
     company: "Jobbit",
     role: "Frontend Engineer",
-    period: "Jan 24 - Dec 25",
-    location: "Remote",
+    start: [2024, 1],
+    end: [2025, 12],
     logo: "/logos/jobbit.jpg",
     href: "https://jobbit.uk",
     bullets: [
@@ -214,8 +237,7 @@ const jobs: ExperienceEntry[] = [
   {
     company: "Freelance",
     role: "JavaScript Developer",
-    period: "Sep 21 - Now",
-    location: "Remote",
+    start: [2021, 9],
     icon: IconDeviceLaptop,
     bullets: [
       "Delivered projects for startups and commercial platforms: an investor service, a metalworking marketplace and an algotrading platform.",

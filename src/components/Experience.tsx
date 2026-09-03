@@ -1,8 +1,14 @@
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { IconArrowUpRight } from "@tabler/icons-react";
 import SectionHeader from "@/components/SectionHeader";
-import { experience, type ExperienceEntry } from "@/data/profile";
+import {
+  experience,
+  formatDuration,
+  formatPeriod,
+  type ExperienceEntry,
+} from "@/data/profile";
 
 function Logo({ entry }: { entry: ExperienceEntry }) {
   if (entry.logo) {
@@ -53,7 +59,10 @@ export default function Experience() {
         onToggle={() => setExpanded((v) => !v)}
         controls="experience-content"
       />
-      <ol id="experience-content" className="space-y-1">
+      <ol
+        id="experience-content"
+        className={expanded ? "divide-y divide-border" : "space-y-1"}
+      >
         {experience.map((e) => (
           <li key={e.company}>
             <div className="-mx-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-muted/60">
@@ -65,9 +74,14 @@ export default function Experience() {
                       href={e.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="block w-fit truncate text-sm font-medium text-foreground hover:underline hover:underline-offset-[3px]"
+                      className="group/link flex w-fit min-w-0 items-center gap-0.5 text-sm font-medium text-foreground hover:underline hover:underline-offset-[3px]"
                     >
-                      {e.company}
+                      <span className="truncate">{e.company}</span>
+                      <IconArrowUpRight
+                        className="size-3.5 shrink-0 text-foreground-quaternary transition-colors group-hover/link:text-foreground-secondary"
+                        stroke={2}
+                        aria-hidden
+                      />
                     </a>
                   ) : (
                     <span className="block w-fit truncate text-sm font-medium text-foreground">
@@ -80,8 +94,11 @@ export default function Experience() {
                     </p>
                   )}
                 </div>
-                <p className="col-start-2 mt-1 whitespace-nowrap text-[13px] text-muted-foreground min-[420px]:col-start-3 min-[420px]:row-start-1 min-[420px]:mt-0">
-                  {e.period} · {e.location}
+                <p
+                  suppressHydrationWarning
+                  className="col-start-2 mt-1 whitespace-nowrap text-[13px] text-muted-foreground min-[420px]:col-start-3 min-[420px]:row-start-1 min-[420px]:mt-0"
+                >
+                  {formatPeriod(e)} · {formatDuration(e)}
                 </p>
                 <AnimatePresence initial={false}>
                   {expanded && e.bullets.length > 0 && (

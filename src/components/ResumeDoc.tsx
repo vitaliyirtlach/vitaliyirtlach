@@ -1,5 +1,12 @@
 import { forwardRef } from "react";
-import { education, experience, profile, skills } from "@/data/profile";
+import {
+  education,
+  experience,
+  formatDuration,
+  formatPeriod,
+  profile,
+  skills,
+} from "@/data/profile";
 
 // Hidden A4-width document rendered from the same data as the page.
 // html2pdf.js rasterizes this node into the downloadable Resume.pdf.
@@ -49,7 +56,7 @@ const ResumeDoc = forwardRef<HTMLDivElement>(function ResumeDoc(_, ref) {
                     </span>
                   </p>
                   <p className="shrink-0 text-[11.5px] text-[#737373]">
-                    {e.period} · {e.location}
+                    {formatPeriod(e)} · {formatDuration(e)}
                   </p>
                 </div>
                 <ul className="mt-1.5 list-disc space-y-1 pl-4">
