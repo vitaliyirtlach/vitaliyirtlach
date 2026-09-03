@@ -58,7 +58,15 @@ export default function Skills() {
                         className="flex items-center gap-1.5 text-[13px] leading-[22px] text-foreground-secondary transition-colors hover:text-foreground"
                       >
                         <span className="flex size-3.5 shrink-0 items-center justify-center">
-                          <BrandIcon icon={s.icon} colored className="size-full" />
+                          {s.icon ? (
+                            <BrandIcon icon={s.icon} colored className="size-full" />
+                          ) : s.ticon ? (
+                            <s.ticon
+                              className="size-full text-foreground-tertiary"
+                              stroke={1.8}
+                              aria-hidden
+                            />
+                          ) : null}
                         </span>
                         {s.name}
                       </a>
