@@ -22,5 +22,20 @@ export default function StatableWidget() {
     };
   }, []);
 
-  return <div ref={ref} className="min-h-6" />;
+  return (
+    <div className="flex flex-col gap-2">
+      <div ref={ref} className="min-h-6" />
+      <p className="text-center text-xs text-foreground-quaternary">
+        Analytics by{" "}
+        <a
+          href="https://statable.com"
+          target="_blank"
+          rel="noreferrer"
+          className="text-foreground-tertiary transition-colors hover:text-foreground"
+        >
+          Statable
+        </a>
+      </p>
+    </div>
+  );
 }
