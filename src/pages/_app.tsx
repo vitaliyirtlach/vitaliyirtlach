@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { MotionConfig } from "framer-motion";
 import { Caveat, Inter } from "next/font/google";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 const caveat = Caveat({ subsets: ["latin"] });
@@ -16,6 +17,10 @@ export default function App({ Component, pageProps }: AppProps) {
           --font-hand: ${caveat.style.fontFamily};
         }
       `}</style>
+      <Script
+        src="https://statable.com/js/3298988/s.js"
+        strategy="afterInteractive"
+      />
       <MotionConfig reducedMotion="user">
         <Component {...pageProps} />
       </MotionConfig>

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import Skills from "@/components/Skills";
+import StatableWidget from "@/components/StatableWidget";
 import { SITE_URL } from "@/data/profile";
 
 const TITLE = "Vitaliy Irtlach – Fullstack JavaScript Engineer";
@@ -57,6 +58,7 @@ export default function Home() {
         <Reveal delay={0.4}>
           <Footer />
         </Reveal>
+        <StatableWidget />
       </main>
     </>
   );
