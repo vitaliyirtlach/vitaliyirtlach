@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Education from "@/components/Education";
 import Experience from "@/components/Experience";
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
 import Reveal from "@/components/Reveal";
 import Skills from "@/components/Skills";
 import StatableWidget from "@/components/StatableWidget";
@@ -11,7 +11,9 @@ import { SITE_URL } from "@/data/profile";
 const TITLE = "Vitaliy Irtlach – Fullstack JavaScript Engineer";
 const DESCRIPTION =
   "Fullstack JavaScript engineer with 5 years of experience building web and mobile products with TypeScript, React and Node.js. Working on Ito and Statable.";
-const OG_IMAGE = `${SITE_URL}/api/og`;
+// Static file instead of an on-request OG route, so the site needs no
+// serverless/edge compute at all on Vercel.
+const OG_IMAGE = `${SITE_URL}/og.png`;
 
 export default function Home() {
   return (
@@ -50,13 +52,13 @@ export default function Home() {
           <Experience />
         </Reveal>
         <Reveal delay={0.2}>
-          <Skills />
+          <Projects />
         </Reveal>
         <Reveal delay={0.3}>
           <Education />
         </Reveal>
         <Reveal delay={0.4}>
-          <Footer />
+          <Skills />
         </Reveal>
         <StatableWidget />
       </main>

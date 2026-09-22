@@ -23,7 +23,7 @@ export default function StatableWidget() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 border-t border-border pt-6">
       <div ref={ref} className="min-h-6" />
       <p className="text-center text-xs text-foreground-quaternary">
         Analytics by{" "}

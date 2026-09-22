@@ -4,6 +4,7 @@ import {
   IconBrandWhatsapp,
   IconFileTypePdf,
   IconMail,
+  IconMapPin,
 } from "@tabler/icons-react";
 import ResumeDoc from "@/components/ResumeDoc";
 import { OPEN_TO_WORK, profile, socials } from "@/data/profile";
@@ -103,6 +104,10 @@ export default function Hero() {
               {profile.name}
             </h1>
             <p className="text-sm text-foreground-tertiary">{profile.title}</p>
+            <p className="mt-0.5 flex items-center gap-1 text-[13px] text-muted-foreground">
+              <IconMapPin className="size-3.5 shrink-0" stroke={1.6} aria-hidden />
+              {profile.location}
+            </p>
           </div>
         </div>
         <nav

@@ -68,6 +68,7 @@ import {
   siLinear,
   siLinux,
   siLodash,
+  siMaplibre,
   siMeta,
   siMongodb,
   siMongoose,
@@ -134,6 +135,7 @@ export const profile = {
   photo: "/photo.jpeg",
   telegram: "https://t.me/vitaliyirtlach",
   email: "vitaliyirtlach@gmail.com",
+  phone: "+380 99 312 38 09",
   whatsapp: "https://wa.me/380993123809",
   location: "Athens, Greece",
 };
@@ -202,6 +204,7 @@ const jobs: ExperienceEntry[] = [
     company: "Ito AI",
     role: "JavaScript Developer",
     start: [2025, 12],
+    end: [2026, 9],
     logo: "/logos/ito.png",
     href: "https://www.ito.ai/",
     bullets: [
@@ -250,6 +253,63 @@ const jobs: ExperienceEntry[] = [
 export const experience: ExperienceEntry[] = OPEN_TO_WORK
   ? [openToWorkEntry, ...jobs]
   : jobs;
+
+export type Project = {
+  name: string;
+  domain: string;
+  href: string;
+  logo: string;
+  description: string;
+  tech: { name: string; icon: SimpleIcon }[];
+};
+
+export const projects: Project[] = [
+  {
+    name: "SafetyMap",
+    domain: "safetymap.online",
+    href: "https://safetymap.online",
+    logo: "/logos/safetymap.png",
+    description:
+      "Interactive crime and safety map of Greece — every region, municipality and neighbourhood scored out of 100 from Eurostat data.",
+    tech: [
+      { name: "Next.js", icon: siNextdotjs },
+      { name: "TypeScript", icon: siTypescript },
+      { name: "MapLibre", icon: siMaplibre },
+      { name: "shadcn/ui", icon: siShadcnui },
+      { name: "Tailwind CSS", icon: siTailwindcss },
+    ],
+  },
+  {
+    name: "Laikimap",
+    domain: "laikimap.online",
+    href: "https://laikimap.online",
+    logo: "/logos/laikimap.png",
+    description:
+      "Every Greek street market on one map — 49 cities, filterable by day and neighbourhood, with geolocation and full localization.",
+    tech: [
+      { name: "Next.js", icon: siNextdotjs },
+      { name: "TypeScript", icon: siTypescript },
+      { name: "MapLibre", icon: siMaplibre },
+      { name: "Motion", icon: siFramer },
+      { name: "Tailwind CSS", icon: siTailwindcss },
+    ],
+  },
+  {
+    name: "SimpleInvoice",
+    domain: "simple-invoice.online",
+    href: "https://simple-invoice.online",
+    logo: "/logos/simple-invoice.png",
+    description:
+      "Free invoice generator that runs entirely in the browser — ten templates, drag-and-drop blocks, 60+ currencies, PDF export without an account.",
+    tech: [
+      { name: "Next.js", icon: siNextdotjs },
+      { name: "TypeScript", icon: siTypescript },
+      { name: "shadcn/ui", icon: siShadcnui },
+      { name: "Zod", icon: siZod },
+      { name: "Tailwind CSS", icon: siTailwindcss },
+    ],
+  },
+];
 
 export type Skill = {
   name: string;

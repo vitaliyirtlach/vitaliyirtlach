@@ -5,6 +5,7 @@ import {
   formatDuration,
   formatPeriod,
   profile,
+  projects,
   skills,
 } from "@/data/profile";
 
@@ -26,8 +27,13 @@ const ResumeDoc = forwardRef<HTMLDivElement>(function ResumeDoc(_, ref) {
           </div>
           <div className="text-right text-[11.5px] leading-5 text-[#525252]">
             <p>{profile.location} · Remote</p>
-            <p>{profile.email} · t.me/vitaliyirtlach</p>
-            <p>github.com/vitaliyirtlach · linkedin.com/in/vitaliyirtlach</p>
+            <p>
+              {profile.email} · {profile.phone}
+            </p>
+            <p>
+              github.com/vitaliyirtlach · linkedin.com/in/vitaliyirtlach ·
+              t.me/vitaliyirtlach
+            </p>
           </div>
         </header>
 
@@ -76,16 +82,24 @@ const ResumeDoc = forwardRef<HTMLDivElement>(function ResumeDoc(_, ref) {
 
         <section className="mt-6">
           <h2 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#171717]">
-            Skills
+            Projects
           </h2>
-          <div className="mt-3 space-y-1.5">
-            {skills.map((cat) => (
-              <p key={cat.category} className="text-[12px] leading-[18px]">
-                <span className="font-semibold">{cat.category}: </span>
-                <span className="text-[#404040]">
-                  {cat.items.map((s) => s.name).join(", ")}
-                </span>
-              </p>
+          <div className="mt-3 space-y-3">
+            {projects.map((p) => (
+              <div key={p.href}>
+                <div className="flex items-baseline justify-between gap-4">
+                  <p className="text-[13.5px] font-semibold">{p.name}</p>
+                  <p className="shrink-0 text-[11.5px] text-[#737373]">
+                    {p.domain}
+                  </p>
+                </div>
+                <p className="mt-1 text-[12px] leading-[18px] text-[#404040]">
+                  {p.description}
+                </p>
+                <p className="mt-0.5 text-[11.5px] text-[#737373]">
+                  {p.tech.map((t) => t.name).join(", ")}
+                </p>
+              </div>
             ))}
           </div>
         </section>
@@ -105,6 +119,22 @@ const ResumeDoc = forwardRef<HTMLDivElement>(function ResumeDoc(_, ref) {
             <p className="shrink-0 text-[11.5px] text-[#737373]">
               {education.period}
             </p>
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <h2 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#171717]">
+            Skills
+          </h2>
+          <div className="mt-3 space-y-1.5">
+            {skills.map((cat) => (
+              <p key={cat.category} className="text-[12px] leading-[18px]">
+                <span className="font-semibold">{cat.category}: </span>
+                <span className="text-[#404040]">
+                  {cat.items.map((s) => s.name).join(", ")}
+                </span>
+              </p>
+            ))}
           </div>
         </section>
       </div>
