@@ -10,7 +10,7 @@ import { SITE_URL } from "@/data/profile";
 
 const TITLE = "Vitaliy Irtlach – Fullstack JavaScript Engineer";
 const DESCRIPTION =
-  "Fullstack JavaScript engineer with 5 years of experience building web and mobile products with TypeScript, React and Node.js. Working on Ito and Statable.";
+  "Fullstack JavaScript engineer in Athens with 5 years of experience building web and mobile products with TypeScript, React and Node.js. Building Statable, SafetyMap and Laikimap.";
 // Static file instead of an on-request OG route, so the site needs no
 // serverless/edge compute at all on Vercel.
 const OG_IMAGE = `${SITE_URL}/og.png`;

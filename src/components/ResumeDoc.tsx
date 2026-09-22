@@ -41,8 +41,8 @@ const ResumeDoc = forwardRef<HTMLDivElement>(function ResumeDoc(_, ref) {
           <p className="text-[12.5px] leading-[19px] text-[#404040]">
             Fullstack JavaScript engineer with 5 years of experience building
             web and mobile products for startups and commercial platforms.
-            Currently working on Ito (AI code review that runs your code) and
-            building web analytics at Statable.
+            Currently building web analytics at Statable and shipping my own
+            products — SafetyMap, Laikimap and SimpleInvoice.
           </p>
         </section>
 

@@ -138,15 +138,37 @@ export default function Hero() {
           platforms.
         </p>
         <p>
-          Right now I&apos;m working on{" "}
+          Right now I&apos;m building web analytics at{" "}
+          <ProjectLink href="https://statable.com" logo="/logos/statable.png">
+            Statable
+          </ProjectLink>{" "}
+          and shipping my own products —{" "}
+          <ProjectLink href="https://safetymap.online" logo="/logos/safetymap.png">
+            SafetyMap
+          </ProjectLink>
+          ,{" "}
+          <ProjectLink href="https://laikimap.online" logo="/logos/laikimap.png">
+            Laikimap
+          </ProjectLink>{" "}
+          and{" "}
+          <ProjectLink
+            href="https://simple-invoice.online"
+            logo="/logos/simple-invoice.png"
+          >
+            SimpleInvoice
+          </ProjectLink>
+          .
+        </p>
+        <p>
+          Before that I spent a year at{" "}
           <ProjectLink href="https://www.ito.ai/" logo="/logos/ito.png">
             Ito
           </ProjectLink>{" "}
-          — AI code review that runs your code — and building web analytics at{" "}
-          <ProjectLink href="https://statable.com" logo="/logos/statable.png">
-            Statable
-          </ProjectLink>
-          .
+          on AI code review that runs your code, and two years at{" "}
+          <ProjectLink href="https://jobbit.uk" logo="/logos/jobbit.jpg">
+            Jobbit
+          </ProjectLink>{" "}
+          building React Native apps.
         </p>
         <p>
           I&apos;m studying Computer Engineering at{" "}
