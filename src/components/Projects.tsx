@@ -2,12 +2,15 @@ import Image from "next/image";
 import { IconArrowUpRight } from "@tabler/icons-react";
 import BrandIcon from "@/components/BrandIcon";
 import SectionHeader from "@/components/SectionHeader";
-import { projects } from "@/data/profile";
+import { projects, projectsIntro } from "@/data/profile";
 
 export default function Projects() {
   return (
     <section aria-labelledby="projects-heading" className="flex flex-col gap-4">
       <SectionHeader title="Projects" id="projects-heading" />
+      <p className="-mt-1 text-[13px] leading-5 text-foreground-secondary">
+        {projectsIntro}
+      </p>
       <ul className="space-y-1">
         {projects.map((p) => (
           <li key={p.href}>

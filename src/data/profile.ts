@@ -1,26 +1,36 @@
 import {
+  IconAccessible,
+  IconAffiliate,
   IconApi,
   IconBrandGithub,
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandOpenai,
+  IconBrandSpeedtest,
   IconBrandTelegram,
   IconBrandX,
   IconClock,
   IconDeviceLaptop,
+  IconDeviceMobile,
   IconDog,
+  IconFileText,
+  IconGauge,
   IconGitPullRequest,
   IconInfinity,
+  IconLanguage,
   IconLayoutKanban,
   IconMail,
   IconMasksTheater,
   IconPaw,
   IconPuzzle,
   IconRefresh,
+  IconSchema,
   IconSchool,
   IconSearch,
+  IconSeo,
   IconSparkles,
   IconTestPipe,
+  IconWorldWww,
   type Icon,
 } from "@tabler/icons-react";
 import {
@@ -43,6 +53,7 @@ import {
   siDiscord,
   siDocker,
   siDocusaurus,
+  siDrizzle,
   siEditorconfig,
   siEslint,
   siExpo,
@@ -87,10 +98,13 @@ import {
   siPrisma,
   siPuppeteer,
   siRabbitmq,
+  siRadixui,
   siReact,
   siReactbootstrap,
+  siReacthookform,
   siReactivex,
   siReactquery,
+  siReacttable,
   siRedis,
   siRedux,
   siSass,
@@ -130,15 +144,39 @@ export const OPEN_TO_WORK = false;
 export const SITE_URL = "https://vitaliyirtlach.vercel.app";
 
 export const profile = {
-  name: "Vitaliy Irtlach",
-  title: "Fullstack JavaScript Engineer",
+  name: "Vitalii Zakaznov",
+  title: "Frontend Engineer",
+  birthDate: "2005-09-13",
+  // Keyword line for recruiters and resume parsers; printed in the PDF header.
+  headline: "React · Next.js · TypeScript · Node.js · 5+ years",
   photo: "/photo.jpeg",
   telegram: "https://t.me/vitaliyirtlach",
   email: "vitaliyirtlach@gmail.com",
   phone: "+380 99 312 38 09",
   whatsapp: "https://wa.me/380993123809",
   location: "Athens, Greece",
+  availability: "Open to remote and relocation across the EU",
+  workAuthorization: "EU work authorization — Temporary Protection (Greece)",
+  languages: "English (B2) · Ukrainian, Russian (native)",
 };
+
+/** Whole years old on the given day; recomputed on the client so a page
+ *  prerendered before a birthday does not go stale. */
+export function age(on: Date = new Date()): number {
+  const [year, month, day] = profile.birthDate.split("-").map(Number);
+  const hadBirthday =
+    on.getMonth() + 1 > month ||
+    (on.getMonth() + 1 === month && on.getDate() >= day);
+  return on.getFullYear() - year - (hadBirthday ? 0 : 1);
+}
+
+// Resume summary: the keywords recruiters and ATS filters look for, in
+// sentences rather than as a keyword dump.
+export const summary =
+  "Frontend engineer with **5+ years of commercial experience** building production web and mobile applications with **TypeScript, React, Next.js and React Native**. Frontend architecture, reusable component libraries, REST API integration and state management, with a focus on **web performance, accessibility and SEO** — backed by hands-on backend work in Node.js, Fastify, NestJS and PostgreSQL. Comfortable in distributed, English-speaking product teams: Agile, code review, CI/CD and mentoring. Currently building web analytics at Statable and shipping my own products: SafetyMap, Laikimap, SimpleInvoice and GreekNameDays.";
+
+/** Drops the ** emphasis marks, for places that need the raw sentence. */
+export const plain = (text: string) => text.replace(/\*\*/g, "");
 
 export type Social = { label: string; href: string; icon: Icon };
 
@@ -161,6 +199,9 @@ export type ExperienceEntry = {
   logo?: string;
   current?: boolean;
   href?: string;
+  /** One line of context before the responsibilities. */
+  intro?: string;
+  /** **Double asterisks** mark the phrases worth bolding; see Rich.tsx. */
   bullets: string[];
 };
 
@@ -202,26 +243,33 @@ const openToWorkEntry: ExperienceEntry = {
 const jobs: ExperienceEntry[] = [
   {
     company: "Ito AI",
-    role: "JavaScript Developer",
+    role: "Frontend Engineer",
     start: [2025, 12],
     end: [2026, 9],
     logo: "/logos/ito.png",
     href: "https://www.ito.ai/",
+    intro:
+      "Built the web platform and dashboard for Ito — **AI code review** that builds and runs your app on every pull request to catch real bugs.",
     bullets: [
-      "Building Ito — AI code review that builds and runs your app on every PR to catch real bugs.",
-      "Develop the web platform and dashboard with Next.js, TypeScript and Tailwind CSS.",
-      "Ship PR-review flows that post video recordings, logs and repro steps straight to GitHub.",
+      "Developing the product UI with **React**, **Next.js**, **TypeScript** and **Tailwind CSS**, including features powered by the **Claude API**.",
+      "**Migrating the monolithic codebase to a Turborepo monorepo on Bun**, splitting it into apps and shared packages — UI library, API client, shared configs — with **CI/CD on GitHub Actions**.",
+      "Working mainly in the Next.js app and the shared UI package, reaching into the **Fastify** and **PostgreSQL** (**Drizzle ORM**) API when a feature needed it.",
+      "Wiring data-heavy dashboards to **REST APIs** with **TanStack Query** and **TanStack Table**: server state, caching, sorting and filtering.",
+      "Collaborating in a distributed, English-speaking product team: **code review**, **technical documentation** and **Figma** hand-off.",
     ],
   },
   {
     company: "Statable",
-    role: "JavaScript Developer",
+    role: "Frontend Engineer",
     start: [2025, 8],
     logo: "/logos/statable.png",
     href: "https://statable.com",
+    intro:
+      "Building the frontend of a **web analytics platform**: dashboards, site settings, team management and an embeddable stats widget.",
     bullets: [
-      "Develop a web analytics platform: dashboards, site settings and an embeddable widget.",
-      "Build features end-to-end across the stack with Next.js and TypeScript.",
+      "Developing data-heavy React interfaces with **Next.js**, **TypeScript**, **TanStack Query**, **TanStack Table**, **Radix UI** and **Tailwind CSS** — charts, virtualized tables and live filters.",
+      "Integrating **REST APIs** and keeping the frontend type-safe end-to-end with **TypeScript** and **Zod**-validated forms.",
+      "Owning **responsive design**, **web performance** and **accessibility** across the dashboard, plus **SEO** for the public pages.",
     ],
   },
   {
@@ -231,21 +279,25 @@ const jobs: ExperienceEntry[] = [
     end: [2025, 12],
     logo: "/logos/jobbit.jpg",
     href: "https://jobbit.uk",
+    intro:
+      "Frontend for Jobbit — a platform that routes real-world tasks between **AI agents** and vetted human specialists.",
     bullets: [
-      "Frontend for Jobbit — a platform that routes real-world tasks between AI agents and vetted human specialists.",
-      "Develop cross-platform mobile apps with React Native.",
-      "Ship frontend features and UI improvements as part of a distributed team.",
+      "Building cross-platform mobile apps with **React Native** and **Expo**, released to the **App Store** and **Google Play**.",
+      "Developing responsive web interfaces with **React**, **TypeScript** and **Redux**, integrating **REST APIs** and handling **state management**.",
+      "Shipping frontend features and UI improvements in a distributed, English-speaking team working in **Agile** sprints with **code review**.",
     ],
   },
   {
     company: "Freelance",
-    role: "JavaScript Developer",
+    role: "Fullstack JavaScript Engineer",
     start: [2021, 9],
     icon: IconDeviceLaptop,
+    intro:
+      "Delivered production projects for startups and commercial platforms: an investor service, a metalworking marketplace and an algotrading platform.",
     bullets: [
-      "Delivered projects for startups and commercial platforms: an investor service, a metalworking marketplace and an algotrading platform.",
-      "Handled the full cycle: scoping with customers, development, technical management and mentoring.",
-      "Interviewed job candidates and managed technical aspects of client projects.",
+      "Handling the full cycle — scoping with customers, frontend and backend development (**React**, **Angular**, **Vue**, **Node.js**, **NestJS**, **PostgreSQL**, **MongoDB**), deployment with **Docker** and ongoing support.",
+      "Leading technical delivery: **software architecture** decisions, **code review**, **technical documentation** and **mentoring** of junior developers.",
+      "Interviewing engineering candidates and managing the technical side of client projects.",
     ],
   },
 ];
@@ -263,7 +315,27 @@ export type Project = {
   tech: { name: string; icon: SimpleIcon }[];
 };
 
+// Why these exist, in one line — the same sentence is used on the page and
+// in the PDF.
+export const projectsIntro =
+  "Every one of these started as something I needed myself and could not find — so I built it properly and turned it into a free tool anyone can use. All of them are live, indexed and maintained.";
+
 export const projects: Project[] = [
+  {
+    name: "GreekNameDays",
+    domain: "greeknamedays.online",
+    href: "https://greeknamedays.online",
+    logo: "/logos/greeknamedays.png",
+    description:
+      "Εορτολόγιο — the Greek name-day calendar: who celebrates today, when any name is celebrated and the saint behind it, in Greek and English. Server-rendered and statically generated for SEO.",
+    tech: [
+      { name: "Next.js", icon: siNextdotjs },
+      { name: "TypeScript", icon: siTypescript },
+      { name: "Radix UI", icon: siRadixui },
+      { name: "Zod", icon: siZod },
+      { name: "Tailwind CSS", icon: siTailwindcss },
+    ],
+  },
   {
     name: "SafetyMap",
     domain: "safetymap.online",
@@ -353,8 +425,11 @@ export const skills: SkillCategory[] = [
       s("React", "https://react.dev", "Primary UI library — dashboards and product UIs at Ito and Statable.", siReact),
       s("Next.js", "https://nextjs.org", "Ito platform, Statable dashboards and this very site.", siNextdotjs),
       s("Tailwind CSS", "https://tailwindcss.com", "My default styling layer — used on Ito, Statable and this site.", siTailwindcss),
-      s("Redux", "https://redux.js.org", "State management in larger React and React Native apps.", siRedux),
-      s("TanStack Query", "https://tanstack.com/query", "Server state and caching in data-heavy dashboards.", siReactquery, true),
+      s("TanStack Query", "https://tanstack.com/query", "Server state and caching in data-heavy dashboards at Ito and Statable.", siReactquery),
+      s("Redux", "https://redux.js.org", "State management in larger React and React Native apps.", siRedux, true),
+      s("TanStack Table", "https://tanstack.com/table", "Sortable, virtualized data tables in analytics dashboards.", siReacttable, true),
+      s("Radix UI", "https://www.radix-ui.com", "Accessible UI primitives behind my component libraries.", siRadixui, true),
+      s("React Hook Form", "https://react-hook-form.com", "Typed forms validated with Zod.", siReacthookform, true),
       t("Zustand", "https://zustand-demo.pmnd.rs", "Lightweight React state for smaller apps.", IconPaw, true),
       s("Flux", "https://facebookarchive.github.io/flux/", "Unidirectional data flow in earlier React apps.", siMeta, true),
       s("Formik", "https://formik.org", "Complex forms with validation.", siFormik, true),
@@ -381,6 +456,19 @@ export const skills: SkillCategory[] = [
     ],
   },
   {
+    category: "Web Craft",
+    items: [
+      t("Responsive Design", "https://developer.mozilla.org/docs/Learn/CSS/CSS_layout/Responsive_Design", "Layouts that hold up from 320px to ultrawide.", IconDeviceMobile),
+      t("Web Performance", "https://web.dev/performance", "Core Web Vitals, bundle budgets and render cost.", IconGauge),
+      t("Accessibility", "https://www.w3.org/WAI/standards-guidelines/wcag/", "a11y: semantic markup, keyboard navigation and WCAG contrast.", IconAccessible),
+      t("SEO", "https://developers.google.com/search/docs", "Technical SEO: metadata, sitemaps, canonical URLs, indexing.", IconSeo),
+      t("Core Web Vitals", "https://web.dev/vitals", "LCP, INP and CLS measured on real pages.", IconBrandSpeedtest, true),
+      t("Server-Side Rendering", "https://nextjs.org/docs/app/getting-started/server-and-client-components", "SSR, SSG and React Server Components in Next.js.", IconWorldWww, true),
+      t("Structured Data", "https://schema.org", "Schema.org JSON-LD for rich results.", IconSchema, true),
+      t("Internationalization", "https://www.w3.org/International/", "Multi-locale sites: routing, translations and formatting.", IconLanguage, true),
+    ],
+  },
+  {
     category: "Mobile",
     items: [
       s("React Native", "https://reactnative.dev", "Cross-platform mobile apps at Jobbit.", siReact),
@@ -394,12 +482,13 @@ export const skills: SkillCategory[] = [
     items: [
       s("Node.js", "https://nodejs.org", "Backend runtime for the APIs and services I build.", siNodedotjs),
       s("NestJS", "https://nestjs.com", "Structured backend APIs for commercial projects.", siNestjs),
-      s("Express", "https://expressjs.com", "Lightweight APIs and internal services.", siExpress),
-      s("GraphQL", "https://graphql.org", "Typed APIs between dashboards and backend services.", siGraphql),
+      s("Fastify", "https://fastify.dev", "High-throughput Node.js services — the API layer at Ito.", siFastify),
+      t("REST API", "https://restfulapi.net", "Designing and integrating versioned HTTP APIs on every project.", IconApi),
+      s("Express", "https://expressjs.com", "Lightweight APIs and internal services.", siExpress, true),
+      s("GraphQL", "https://graphql.org", "Typed APIs between dashboards and backend services.", siGraphql, true),
       s("Apollo GraphQL", "https://www.apollographql.com", "GraphQL servers and clients.", siApollographql, true),
       s("TypeGraphQL", "https://typegraphql.com", "Code-first GraphQL schemas in TypeScript.", siGraphql, true),
       s("GraphQL Codegen", "https://the-guild.dev/graphql/codegen", "Typed clients generated from schemas.", siGraphql, true),
-      s("Fastify", "https://fastify.dev", "High-throughput Node.js services.", siFastify, true),
       s("Bun", "https://bun.sh", "Fast runtime for tooling and scripts.", siBun, true),
       s("tRPC", "https://trpc.io", "End-to-end typed APIs inside Next.js apps.", siTrpc, true),
       s("Socket.IO", "https://socket.io", "Real-time features: live updates, notifications, chat.", siSocketdotio, true),
@@ -417,6 +506,7 @@ export const skills: SkillCategory[] = [
       s("MongoDB", "https://www.mongodb.com", "Document storage in freelance and startup projects.", siMongodb),
       s("Redis", "https://redis.io", "Caching, queues and session storage.", siRedis),
       s("Prisma", "https://www.prisma.io", "ORM of choice on top of PostgreSQL.", siPrisma),
+      s("Drizzle ORM", "https://orm.drizzle.team", "Typed SQL and migrations on PostgreSQL at Ito.", siDrizzle),
       s("Mongoose", "https://mongoosejs.com", "MongoDB models and schemas.", siMongoose, true),
       s("Sequelize", "https://sequelize.org", "ORM in Express-based backends.", siSequelize, true),
       s("TypeORM", "https://typeorm.io", "ORM in NestJS-based backends.", siTypeorm, true),
@@ -498,9 +588,10 @@ export const skills: SkillCategory[] = [
       t("Kanban", "https://www.atlassian.com/agile/kanban", "Flow-based delivery for support and ops work.", IconLayoutKanban),
       t("Code Review", "https://google.github.io/eng-practices/review/", "Reviewing PRs and mentoring through reviews.", IconGitPullRequest, true),
       t("TDD", "https://martinfowler.com/bliki/TestDrivenDevelopment.html", "Test-first where it pays off.", IconTestPipe, true),
-      t("REST API", "https://restfulapi.net", "Designing clean, versioned HTTP APIs.", IconApi, true),
       t("CI/CD", "https://www.atlassian.com/continuous-delivery", "Automated pipelines from commit to deploy.", IconInfinity, true),
       t("Design Patterns", "https://refactoring.guru/design-patterns", "Classic GoF and architectural patterns.", IconPuzzle, true),
+      t("Frontend Architecture", "https://martinfowler.com/architecture/", "Structuring apps, state and component boundaries.", IconAffiliate, true),
+      t("Technical Documentation", "https://diataxis.fr", "Specs, READMEs and onboarding docs teams actually read.", IconFileText, true),
       t("Mentoring", "https://www.mentoring.org", "Onboarding and growing junior developers.", IconSchool, true),
     ],
   },
@@ -516,8 +607,10 @@ export const skills: SkillCategory[] = [
 
 export const education = {
   school: "Oles Honchar Dnipro National University",
-  degree: "Computer Engineering",
-  period: "2023 - Now",
+  // Spelled out for resume parsers: "Bachelor's Degree" and the field of study
+  // are what ATS filters match on, not the university's internal code.
+  degree: "Bachelor of Science (B.Sc.) in Computer Engineering",
+  period: "2023 - 2027 (expected)",
   href: "https://www.dnu.dp.ua/en",
   logo: "/logos/dnu.jpg",
 };

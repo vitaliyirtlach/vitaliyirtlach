@@ -7,7 +7,7 @@ import {
   IconMapPin,
 } from "@tabler/icons-react";
 import ResumeDoc from "@/components/ResumeDoc";
-import { OPEN_TO_WORK, profile, socials } from "@/data/profile";
+import { OPEN_TO_WORK, age, profile, socials } from "@/data/profile";
 
 function HandArrow({ className }: { className?: string }) {
   return (
@@ -73,12 +73,17 @@ export default function Hero() {
       const html2pdf = (await import("html2pdf.js")).default;
       await html2pdf()
         .set({
-          margin: 0,
-          filename: "Vitaliy-Irtlach-Resume.pdf",
+          margin: [12, 0, 12, 0],
+          filename: "Vitalii-Zakaznov-Resume.pdf",
           image: { type: "jpeg", quality: 0.98 },
           html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-          pagebreak: { mode: ["avoid-all", "css"] },
+          // "avoid-all" would mark whole sections unbreakable: anything
+          // shorter than a page gets pushed to the next one, leaving a huge
+          // gap. Only the atomic blocks in ResumeDoc opt out, via CSS.
+          pagebreak: { mode: ["css", "legacy"] },
+          // Turns every <a> in ResumeDoc into a real PDF link annotation.
+          enableLinks: true,
         })
         .from(resumeRef.current)
         .save();
@@ -106,7 +111,7 @@ export default function Hero() {
             <p className="text-sm text-foreground-tertiary">{profile.title}</p>
             <p className="mt-0.5 flex items-center gap-1 text-[13px] text-muted-foreground">
               <IconMapPin className="size-3.5 shrink-0" stroke={1.6} aria-hidden />
-              {profile.location}
+              {profile.location} · Remote · EU
             </p>
           </div>
         </div>
@@ -131,51 +136,71 @@ export default function Hero() {
       </div>
 
       <div className="space-y-4 text-sm leading-relaxed text-foreground-secondary">
-        <p>
-          Hey, I&apos;m Vitaliy — a fullstack JavaScript engineer from Dnipro,
-          Ukraine, now based in Athens, Greece, with 5 years of experience
-          building web and mobile products for startups and commercial
-          platforms.
+        <p suppressHydrationWarning>
+          Hey, I&apos;m Vitalii — a {age()}-year-old frontend engineer from
+          Dnipro, Ukraine, now based in Athens, Greece, with 5+ years of
+          commercial experience building production web and mobile
+          applications with TypeScript, React, Next.js and React Native for
+          startups and product teams.
         </p>
         <p>
           Right now I&apos;m building web analytics at{" "}
           <ProjectLink href="https://statable.com" logo="/logos/statable.png">
             Statable
           </ProjectLink>{" "}
-          and shipping my own products —{" "}
+          — data-heavy React dashboards, API integrations and an embeddable
+          widget.
+        </p>
+        <p>
+          On the side I ship my own products:{" "}
           <ProjectLink href="https://safetymap.online" logo="/logos/safetymap.png">
             SafetyMap
           </ProjectLink>
           ,{" "}
           <ProjectLink href="https://laikimap.online" logo="/logos/laikimap.png">
             Laikimap
-          </ProjectLink>{" "}
-          and{" "}
+          </ProjectLink>
+          ,{" "}
           <ProjectLink
             href="https://simple-invoice.online"
             logo="/logos/simple-invoice.png"
           >
             SimpleInvoice
+          </ProjectLink>{" "}
+          and{" "}
+          <ProjectLink
+            href="https://greeknamedays.online"
+            logo="/logos/greeknamedays.png"
+          >
+            GreekNameDays
           </ProjectLink>
-          .
+          . Each one started as something I needed myself and couldn&apos;t
+          find, so I built it properly and made it work for everyone else too.
         </p>
         <p>
           Before that I spent a year at{" "}
           <ProjectLink href="https://www.ito.ai/" logo="/logos/ito.png">
             Ito
           </ProjectLink>{" "}
-          on AI code review that runs your code, and two years at{" "}
+          on AI code review that runs your code, where I moved the codebase
+          from a monolith to a Turborepo monorepo and worked mostly in the
+          Next.js app — and two years at{" "}
           <ProjectLink href="https://jobbit.uk" logo="/logos/jobbit.jpg">
             Jobbit
           </ProjectLink>{" "}
-          building React Native apps.
+          building cross-platform React Native apps.
         </p>
         <p>
-          I&apos;m studying Computer Engineering at{" "}
+          I&apos;m finishing a Bachelor&apos;s degree in Computer Engineering at{" "}
           <a href="https://www.dnu.dp.ua/en" target="_blank" rel="noreferrer" className={bioLink}>
             Oles Honchar Dnipro National University
           </a>
           .
+        </p>
+        <p>
+          I work remotely from Athens in distributed, English-speaking teams,
+          and I&apos;m open to relocation across the EU — I have EU work
+          authorization under Temporary Protection.
         </p>
         <p>
           Outside of work I&apos;m into fitness and keeping an eye on whatever

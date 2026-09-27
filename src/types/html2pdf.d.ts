@@ -6,6 +6,8 @@ declare module "html2pdf.js" {
     html2canvas?: Record<string, unknown>;
     jsPDF?: Record<string, unknown>;
     pagebreak?: { mode?: string | string[] };
+    /** Adds a PDF link annotation for every <a> in the source. */
+    enableLinks?: boolean;
   };
 
   type Html2Pdf = {

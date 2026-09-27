@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconArrowUpRight } from "@tabler/icons-react";
+import Rich from "@/components/Rich";
 import SectionHeader from "@/components/SectionHeader";
 import {
   experience,
@@ -33,18 +34,25 @@ function Logo({ entry }: { entry: ExperienceEntry }) {
   );
 }
 
-function Bullets({ bullets }: { bullets: string[] }) {
+function Bullets({ entry }: { entry: ExperienceEntry }) {
   return (
-    <ul className="space-y-1 pl-3.5 pt-1">
-      {bullets.map((b) => (
-        <li
-          key={b}
-          className="relative text-[13px] leading-5 text-foreground-tertiary before:absolute before:-left-[14px] before:top-2 before:size-1 before:rounded-full before:bg-foreground-quaternary before:content-['']"
-        >
-          {b}
-        </li>
-      ))}
-    </ul>
+    <div className="pt-1">
+      {entry.intro && (
+        <p className="text-[13px] leading-5 text-foreground-secondary">
+          <Rich text={entry.intro} strongClassName="font-medium text-foreground" />
+        </p>
+      )}
+      <ul className="space-y-1 pl-3.5 pt-1">
+        {entry.bullets.map((b) => (
+          <li
+            key={b}
+            className="relative text-[13px] leading-5 text-foreground-tertiary before:absolute before:-left-[14px] before:top-2 before:size-1 before:rounded-full before:bg-foreground-quaternary before:content-['']"
+          >
+            <Rich text={b} strongClassName="font-medium text-foreground-secondary" />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -110,7 +118,7 @@ export default function Experience() {
                       transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
                       className="col-start-2 overflow-hidden min-[420px]:col-end-4"
                     >
-                      <Bullets bullets={e.bullets} />
+                      <Bullets entry={e} />
                     </motion.div>
                   )}
                 </AnimatePresence>
